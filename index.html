@@ -1,131 +1,818 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jasmine's Portfolio</title>
+    <title>ONE BANK</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f4f7fc;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
+
+        body {
+            background-color: #f8f9fa;
+            color: #2d3436;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+        }
+
         .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 32px 16px;
+        }
+
+        .logo-section {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            padding: 30px;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        .header h1 {
-            font-size: 36px;
-            color: #0066cc;
-        }
-        .header p {
-            font-size: 18px;
-            color: #888;
-        }
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-        .contact-info div {
-            margin-right: 20px;
-        }
-        .work-experience {
-            width: 100%;
-            max-width: 800px;
-            margin-bottom: 50px;
-        }
-        .work-experience h2 {
-            font-size: 24px;
-            color: #333;
-            border-bottom: 2px solid #0066cc;
-            padding-bottom: 10px;
             margin-bottom: 20px;
         }
-        .work-item {
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-circle {
+            width: 30px;
+            height: 30px;
+            border: 2px solid #000;
+            border-radius: 50%;
+            margin-right: 10px;
+            position: relative;
+        }
+
+        .logo-circle::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background-color: #000;
+            border-radius: 50%;
+        }
+
+        .logo-text {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .dark-mode-toggle {
+            width: 60px;
+            height: 30px;
+            background-color: #f0f0f0;
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .toggle-circle {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            background-color: #000;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: linear-gradient(135deg, #6c5ce7 0%, #a363d9 100%);
+            border-radius: 24px;
+            padding: 60px;
+            color: white;
+            margin-bottom: 64px;
+            box-shadow: 0 20px 40px rgba(108, 92, 231, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .hero-content {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-title {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            background: linear-gradient(to right, #fff, rgba(255,255,255,0.8));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 18px;
+            margin-bottom: 32px;
+            max-width: 600px;
+        }
+
+        .app-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: #fff;
+            color: #6c5ce7;
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .app-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            background: #f8f9fa;
+        }
+
+        .arrow-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-display {
+            position: absolute;
+            right: 40px;
+            top: 40px;
+        }
+
+        .credit-card {
+            background: linear-gradient(135deg, #2d3436 0%, #1a1a1a 100%);
+            border-radius: 20px;
+            padding: 25px;
+            color: white;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transform: rotate(-5deg);
+            transition: all 0.3s ease;
+        }
+
+        .credit-card:hover {
+            transform: rotate(0deg) translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        }
+
+        .card-logo {
+            font-size: 12px;
             margin-bottom: 30px;
         }
-        .work-item h3 {
-            font-size: 20px;
-            color: #0066cc;
+
+        .card-balance {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
         }
-        .work-item p {
-            font-size: 16px;
+
+        .card-holder {
+            font-size: 12px;
+        }
+
+        .card-exp {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            font-size: 12px;
+        }
+
+        .card-highlight {
+            position: absolute;
+            right: -20px;
+            height: 100%;
+            width: 30px;
+            background-color: #ffffc0;
+            border-radius: 15px;
+        }
+
+        .stats-badge {
+            position: absolute;
+            right: 40px;
+            bottom: 40px;
+            background-color: #ffffc0;
+            padding: 15px;
+            border-radius: 15px;
+            width: 150px;
+        }
+
+        .stats-number {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .stats-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            margin: 64px 0;
+            padding: 0 32px;
+        }
+
+        .stat-box {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 54px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #6c5ce7 0%, #a363d9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
             color: #555;
         }
-        .skills {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
+
+        .image-with-play {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background-color: #f0f0f0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 30px;
         }
-        .skills img {
-            width: 50px;
-            height: 50px;
+
+        .play-button {
+            position: absolute;
+            left: 20px;
+            bottom: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: #ffffc0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .play-button::after {
+            content: "▶";
+            color: #000;
+        }
+
+        .get-started-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: #000;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .testimonials-section {
+            background: white;
+            border-radius: 24px;
+            padding: 60px 0;
+            margin: 64px 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .testimonials-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            padding-left: 40px;
+        }
+
+        .testimonials-container {
+            display: flex;
+            gap: 24px;
+            padding: 0 60px;
+            overflow-x: hidden;
+            overflow-y: visible;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            position: relative;
+            height: 380px;
+            padding-top: 20px;
+        }
+
+        .testimonials-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .testimonial-card {
+            flex: 0 0 350px;
+            background: #fff;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .testimonial-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            z-index: 5;
+        }
+
+        .testimonial-quote {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2d3436;
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+
+        .testimonial-text {
+            color: #636e72;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 32px;
+            flex-grow: 1;
+            overflow: hidden;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6c5ce7 0%, #a363d9 100%);
+            margin-right: 16px;
+        }
+
+        .author-info {
+            font-size: 14px;
+        }
+
+        .author-name {
+            font-weight: bold;
+        }
+
+        .author-title {
+            color: #555;
+        }
+
+        .navigation-controls {
+            position: absolute;
+            top: 60px;
+            right: 60px;
+            display: flex;
+            gap: 16px;
+            z-index: 10;
+        }
+
+        .nav-button {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 1;
+        }
+
+        .nav-button.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-button.prev {
+            background: #6c5ce7;
+            color: #fff;
+        }
+
+        .nav-button.next {
+            background: #6c5ce7;
+            color: #fff;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-button svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .dark-mode {
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+
+        .dark-mode .stat-box,
+        .dark-mode .testimonials-section,
+        .dark-mode .testimonial-card {
+            background: #2d3436;
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        .dark-mode .testimonial-quote {
+            color: #ffffff;
+        }
+
+        .dark-mode .testimonial-text {
+            color: #b2bec3;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 42px;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 16px;
+            }
+            
+            .hero-section {
+                grid-template-columns: 1fr;
+                padding: 40px 30px;
+            }
+            
+            .hero-image {
+                order: -1;
+                margin-bottom: 30px;
+            }
+            
+            .hero-content {
+                padding: 0;
+            }
+            
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .card-display {
+                position: relative;
+                right: auto;
+                top: auto;
+                margin-top: 30px;
+                display: flex;
+                justify-content: center;
+            }
+            
+            .credit-card {
+                transform: none;
+            }
+            
+            .testimonials-title {
+                padding-left: 20px;
+                font-size: 28px;
+            }
+            
+            .testimonials-container {
+                padding: 0 20px;
+                padding-top: 20px;
+            }
+            
+            .navigation-controls {
+                top: 60px;
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 16px;
+            }
+            
+            .hero-title {
+                font-size: 32px;
+            }
+            
+            .hero-text {
+                font-size: 16px;
+            }
+            
+            .app-button {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .testimonial-card {
+                flex: 0 0 280px;
+                padding: 24px;
+            }
+            
+            .testimonial-quote {
+                font-size: 20px;
+            }
+            
+            .testimonial-text {
+                font-size: 14px;
+            }
+            
+            .navigation-controls {
+                top: auto;
+                right: auto;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .logo-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            
+            .dark-mode-toggle {
+                align-self: flex-end;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>Jasmine's Portfolio</h1>
-            <p>工作经历</p>
-        </div>
-
-        <!-- Contact Info -->
-        <div class="contact-info">
-            <div>
-                <p>邮件: 1092609410@qq.com</p>
-                <p>微信: karthus_ko</p>
+        <div class="logo-section">
+            <div class="logo">
+                <div class="logo-circle"></div>
+                <div class="logo-text">ONE BANK</div>
             </div>
-            <div>
-                <p>刘辕敏</p>
-                <p>32岁 | 本科 | 8年UI工作经验 | 已婚育</p>
+            <div class="dark-mode-toggle" role="button" aria-label="Toggle dark mode">
+                <div class="toggle-circle"></div>
             </div>
         </div>
 
-        <!-- Work Experience -->
-        <div class="work-experience">
-            <h2>工作经历</h2>
-            <div class="work-item">
-                <h3>成都返回空汇网络技术有限公司</h3>
-                <p>高级UI/UE设计师 (2020.8 - 至今)</p>
-                <p>负责公司产品的UI、B端业务线，项目框架搭建与设计规范制定，参与商业价值评估、产品分析、需求文档的编写，推动UI工作在产品中的落地，制定设计规范，完善设计协作流程，推动协同工具的使用，组织研究调研及回顾制度</p>
+        <div class="hero-section">
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800" alt="Professional banker smiling">
             </div>
-            <div class="work-item">
-                <h3>成都国星航科技股份有限公司</h3>
-                <p>用户体验设计师 (2019.5 - 2020.7)</p>
-                <p>全链路产品交互设计，市场调研，用户需求和产品规划，深入业务讨论；主导需求开发并参与迭代；协同开发团队参与产品设计及产品代</p>
+            <div class="hero-content">
+                <h1 class="hero-title">Banking Made Simple, <br>For The Future</h1>
+                <p class="hero-text">Experience seamless banking with cutting-edge technology and personalized service. Join millions who trust us with their financial journey.</p>
+                <a href="#" class="app-button">
+                    Get Started Now
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
             </div>
-            <div class="work-item">
-                <h3>四川海盛信息技术有限公司</h3>
-                <p>UI/UE设计师 (2016.3 - 2019.4)</p>
-                <p>参与市场调研，产品策划，用户研究与竞品分析；主导从项目的产品设计，现有产品的重构与迭代</p>
-            </div>
-            <div class="work-item">
-                <h3>房天下新房集团 (搜房网)</h3>
-                <p>UI设计师 (2015.10 - 2016.3)</p>
-                <p>负责公司线上线下交互设计，市场调研，用户需求和产品规划，协同开发团队进行产品设计</p>
-            </div>
-            <div class="work-item">
-                <h3>重庆美尔地产有限公司</h3>
-                <p>广告策划与视觉设计师 (2013.7 - 2015.7)</p>
-                <p>负责广告创意及制作，执行平面广告的宣传资料设计工作</p>
+
+            <div class="card-display">
+                <div class="credit-card">
+                    <div class="card-logo">VISA INFINITE</div>
+                    <div class="card-balance">$38,458.00</div>
+                    <div class="card-holder">KEVIN SMITH</div>
+                    <div class="card-exp">EXP 09/28</div>
+                </div>
             </div>
         </div>
 
-        <!-- Skills -->
-        <div class="skills">
-            <a href="test.html">点击这里查看滚动动画示例</a>
+        <div class="stats-container">
+            <div class="stat-box">
+                <div class="stat-number">2.5M+</div>
+                <div class="stat-label">Active Users</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">99.9%</div>
+                <div class="stat-label">Uptime Guarantee</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">$50B+</div>
+                <div class="stat-label">Transactions</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Support Available</div>
+            </div>
+        </div>
+
+        <div class="testimonials-section">
+            <h2 class="testimonials-title">What Our Clients Say</h2>
+            <div class="testimonials-container">
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"The Future of Banking"</div>
+                    <div class="testimonial-text">The seamless integration of modern technology with traditional banking services has transformed how I manage my finances. The security features give me complete peace of mind.</div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar"></div>
+                        <div class="author-info">
+                            <div class="author-name">Sarah Johnson</div>
+                            <div class="author-title">CEO at TechCorp</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"Exceptional Service"</div>
+                    <div class="testimonial-text">The customer service is unmatched. Whether it's 3 PM or 3 AM, their support team is always there to help. This level of dedication is rare in today's banking world.</div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar"></div>
+                        <div class="author-info">
+                            <div class="author-name">Michael Chen</div>
+                            <div class="author-title">Founder at StartupX</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"Simply Revolutionary"</div>
+                    <div class="testimonial-text">The mobile app is intuitive and powerful. I can manage all my accounts, investments, and transactions with just a few taps. Banking has never been this convenient.</div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar"></div>
+                        <div class="author-info">
+                            <div class="author-name">Emma Davis</div>
+                            <div class="author-title">Financial Analyst</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"Simply Revolutionary"</div>
+                    <div class="testimonial-text">The mobile app is intuitive and powerful. I can manage all my accounts, investments, and transactions with just a few taps. Banking has never been this convenient.</div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar"></div>
+                        <div class="author-info">
+                            <div class="author-name">Emma Davis</div>
+                            <div class="author-title">Financial Analyst</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation-controls">
+                <div class="nav-button prev" aria-label="Previous testimonial">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </div>
+                <div class="nav-button next" aria-label="Next testimonial">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </div>
+            </div>
         </div>
     </div>
+
+    <script>
+        // Enhanced Dark mode toggle functionality
+        const darkModeToggle = document.querySelector('.dark-mode-toggle');
+        const toggleCircle = document.querySelector('.toggle-circle');
+        
+        // Check for saved user preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+            toggleCircle.style.right = '35px';
+            toggleCircle.style.backgroundColor = '#fff';
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            
+            toggleCircle.style.right = isDarkMode ? '35px' : '5px';
+            toggleCircle.style.backgroundColor = isDarkMode ? '#fff' : '#000';
+            
+            // Save user preference
+            localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+        });
+
+        // Enhanced testimonial navigation
+        const prevButton = document.querySelector('.nav-button.prev');
+        const nextButton = document.querySelector('.nav-button.next');
+        const testimonialContainer = document.querySelector('.testimonials-container');
+        
+        let scrollAmount = 0;
+        let cardWidth = 400; // Changed from const to let so it can be updated
+        
+        // Calculate the maximum scroll amount
+        const maxScroll = () => {
+            return testimonialContainer.scrollWidth - testimonialContainer.clientWidth;
+        };
+
+        function updateNavigationButtons() {
+            const isAtStart = scrollAmount <= 10;
+            const isAtEnd = scrollAmount >= maxScroll() - 10;
+            
+            prevButton.classList.toggle('disabled', isAtStart);
+            nextButton.classList.toggle('disabled', isAtEnd);
+            
+            if (isAtStart) {
+                scrollAmount = 0;
+            } else if (isAtEnd) {
+                scrollAmount = maxScroll();
+            }
+        }
+
+        prevButton.addEventListener('click', () => {
+            if (prevButton.classList.contains('disabled')) return;
+            scrollAmount = Math.max(scrollAmount - cardWidth, 0);
+            testimonialContainer.scroll({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+            setTimeout(updateNavigationButtons, 500);
+        });
+        
+        nextButton.addEventListener('click', () => {
+            if (nextButton.classList.contains('disabled')) return;
+            scrollAmount = Math.min(
+                scrollAmount + cardWidth,
+                maxScroll()
+            );
+            testimonialContainer.scroll({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+            setTimeout(updateNavigationButtons, 500);
+        });
+
+        testimonialContainer.addEventListener('scroll', () => {
+            scrollAmount = testimonialContainer.scrollLeft;
+            updateNavigationButtons();
+        });
+
+        // Adjust card width for mobile
+        function updateCardWidth() {
+            if (window.innerWidth <= 480) {
+                cardWidth = 304; // 280px card + 24px gap
+            } else {
+                cardWidth = 400;
+            }
+        }
+        
+        // Initialize card width
+        updateCardWidth();
+        
+        // Update on window resize
+        window.addEventListener('resize', () => {
+            updateCardWidth();
+            updateNavigationButtons();
+        });
+
+        // Initialize button states
+        window.addEventListener('load', () => {
+            updateNavigationButtons();
+        });
+    </script>
 </body>
 </html>
